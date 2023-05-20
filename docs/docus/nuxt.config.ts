@@ -19,6 +19,6 @@ export default defineNuxtConfig({
     resolve('./assets/css/main.css')
   ],
   dir: {
-    public: resolve('../public')
+    public: '../public'
   }
 })
