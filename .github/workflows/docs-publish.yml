@@ -3,11 +3,15 @@ name: docs-publish
 on:
   push:
     branches:
-      - master 
+      - master
+    paths:
+      - 'docs/**'
   pull_request:
     types: [opened, synchronize]
     branches:
       - master
+    paths:
+      - 'docs/**'
 
 permissions:
   contents: write
