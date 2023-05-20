@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "name": "docus",
+      "path": "./docus"
+    },
+    {
+      "name": "content",
+      "path": "./content"
+    }
+  ],
+  "settings": {
+    "explorer.fileNesting.patterns": {
+      // Nuxt Config
+      "nuxt.config.ts": "app.config.ts, tokens.config.ts",
+      // Root JS config
+      "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, .editorconfig, .eslintignore, tsconfig.json, .eslintrc.cjs, .gitignore, renovate.json, .npmrc"
+    }
+  }
+}

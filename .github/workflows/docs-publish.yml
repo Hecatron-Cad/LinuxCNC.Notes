@@ -1,0 +1,58 @@
+name: docs-publish
+
+on:
+  push:
+    branches:
+      - master 
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  docs-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./docs/docus
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set paths
+        id: set-paths
+        run: |
+          echo "NUXT_APP_BASE_URL=/${GITHUB_REPOSITORY#*/}/" >> $GITHUB_ENV
+          echo "::set-output name=cachedir::$(pwd)/.nuxt"
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2.2.4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: latest
+
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v3
+        with:
+          key: nuxt-${{ env.cache_id }}
+          path: ${{ steps.set-paths.outputs.cachedir }}
+          restore-keys: |
+            nuxt-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Generate static files
+        run: pnpm generate
+
+      - name: Publish static Files
+        run: |
+            git config --global user.name "${GITHUB_ACTOR}"
+            git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+            pnpm ghpublish
