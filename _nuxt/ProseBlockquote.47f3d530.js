@@ -1,0 +1,1 @@
+import{x as o,o as t,i as _,K as c}from"./entry.f22640dd.js";const r={};function s(e,n){return t(),_("blockquote",null,[c(e.$slots,"default",{},void 0,!0)])}const a=o(r,[["render",s],["__scopeId","data-v-1d2716dc"]]);export{a as default};
