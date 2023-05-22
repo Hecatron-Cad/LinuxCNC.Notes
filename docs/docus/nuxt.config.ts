@@ -5,7 +5,10 @@ const { resolve } = createResolver(import.meta.url)
 export default defineNuxtConfig({
   extends: '@nuxt-themes/docus',
   modules: [
-    '@nuxt/image-edge'
+    // https://github.com/nuxt/image
+    '@nuxt/image-edge',
+    // https://github.com/nuxt/devtools
+    '@nuxt/devtools'
   ],
   content: {
     sources: {
@@ -20,5 +23,9 @@ export default defineNuxtConfig({
   ],
   dir: {
     public: '../public'
-  }
+  },
+  // Fix issue with Nuxt 3.5 under windows
+  experimental: {
+    watcher: 'chokidar'
+  },
 })
