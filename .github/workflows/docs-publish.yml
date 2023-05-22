@@ -56,7 +56,7 @@ jobs:
         run: pnpm generate
 
       - name: Publish static Files
-        run: |
-            git config --global user.name "${GITHUB_ACTOR}"
-            git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-            pnpm ghpublish
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
